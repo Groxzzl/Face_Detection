@@ -22,7 +22,7 @@ def main():
     while True:
         ret, frame = camera.read()
         if not ret:
-            print("⚠️ Kamera gak kebaca, cek index kameranya bro.")
+            print(" Kamera tidak terdeteksi, silahkan cek index camera!.")
             break
 
         frame_count += 1
