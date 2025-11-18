@@ -75,7 +75,7 @@ const Announcements = () => {
       case 'low':
         return 'bg-green-100 text-green-700 border-green-300';
       default:
-        return 'bg-gray-100 text-gray-700 border-gray-300';
+        return 'bg-slate-100 text-slate-700 border-slate-300';
     }
   };
 
@@ -93,46 +93,46 @@ const Announcements = () => {
   };
 
   return (
-    <div className="py-12 bg-gray-50">
+    <div className="py-16 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Pengumuman Kelas</h1>
-          <p className="text-xl text-gray-600">Informasi terbaru untuk Kelas XI TJKT 1</p>
+          <h1 className="section-title mb-2">Pengumuman Kelas</h1>
+          <p className="section-subtitle">Informasi terbaru dan penting untuk Kelas XI TJKT 1</p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 mb-12">
           {announcements.map((announcement) => (
-            <div key={announcement.id} className="card p-6 hover:shadow-xl transition-shadow">
+            <div key={announcement.id} className="card p-6 hover:shadow-xl hover:border-primary-200 transition-all duration-300">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h2 className="text-2xl font-bold text-gray-900">{announcement.title}</h2>
-                    <span className={`text-xs px-3 py-1 rounded-full border ${getPriorityColor(announcement.priority)}`}>
+                  <div className="flex items-center gap-3 mb-3 flex-wrap">
+                    <h2 className="text-xl font-bold text-slate-900">{announcement.title}</h2>
+                    <span className={`text-xs px-3 py-1 rounded-full border font-medium ${getPriorityColor(announcement.priority)}`}>
                       {getPriorityLabel(announcement.priority)}
                     </span>
                   </div>
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                     <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                       {announcement.date}
                     </span>
-                    <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-xs font-medium">
+                    <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-lg text-xs font-medium">
                       {announcement.category}
                     </span>
                   </div>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">{announcement.content}</p>
+              <p className="text-slate-700 leading-relaxed">{announcement.content}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 card p-8 bg-gradient-to-r from-primary-50 to-primary-100 border-2 border-primary-200">
+        <div className="card p-8 bg-gradient-to-r from-primary-50 to-primary-100 border-2 border-primary-200 mb-12 hover:shadow-xl transition-all duration-300">
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Ada Pengumuman?</h3>
-            <p className="text-gray-700 mb-6">
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">Ada Pengumuman?</h3>
+            <p className="text-slate-700 mb-6">
               Jika ada informasi penting yang perlu disampaikan ke seluruh kelas, hubungi ketua kelas atau sekretaris
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -146,39 +146,39 @@ const Announcements = () => {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card p-6 text-center">
-            <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="card p-6 text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-red-50 to-red-100/50">
+            <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
-            <h4 className="font-semibold text-gray-900 mb-1">Penting</h4>
-            <p className="text-2xl font-bold text-primary-600">
+            <h4 className="font-semibold text-slate-900 mb-1">Penting</h4>
+            <p className="text-3xl font-bold text-primary-600">
               {announcements.filter(a => a.priority === 'high').length}
             </p>
           </div>
 
-          <div className="card p-6 text-center">
-            <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="card p-6 text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-yellow-50 to-yellow-100/50">
+            <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h4 className="font-semibold text-gray-900 mb-1">Sedang</h4>
-            <p className="text-2xl font-bold text-primary-600">
+            <h4 className="font-semibold text-slate-900 mb-1">Sedang</h4>
+            <p className="text-3xl font-bold text-primary-600">
               {announcements.filter(a => a.priority === 'medium').length}
             </p>
           </div>
 
-          <div className="card p-6 text-center">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="card p-6 text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-green-50 to-green-100/50">
+            <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h4 className="font-semibold text-gray-900 mb-1">Info</h4>
-            <p className="text-2xl font-bold text-primary-600">
+            <h4 className="font-semibold text-slate-900 mb-1">Info</h4>
+            <p className="text-3xl font-bold text-primary-600">
               {announcements.filter(a => a.priority === 'low').length}
             </p>
           </div>

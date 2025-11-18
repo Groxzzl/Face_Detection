@@ -31,34 +31,34 @@ const Gallery = () => {
     : galleryItems.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="py-12 bg-gray-50">
+    <div className="py-16 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Galeri Kegiatan</h1>
-          <p className="text-xl text-gray-600">Dokumentasi kegiatan Kelas XI TJKT 1</p>
+          <h1 className="section-title mb-2">Galeri Kegiatan</h1>
+          <p className="section-subtitle">Dokumentasi lengkap momen-momen bersejarah kelas kami</p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`px-6 py-2.5 rounded-xl font-medium transition-all duration-300 ${
                 selectedCategory === category.id
-                  ? 'bg-primary-600 text-white shadow-lg scale-105'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
+                  ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg scale-105'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 hover:shadow-md'
+              } border ${selectedCategory === category.id ? 'border-primary-600' : 'border-slate-200'}`}
             >
               {category.name}
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredItems.map((item) => (
-            <div key={item.id} className="card overflow-hidden group cursor-pointer">
+            <div key={item.id} className="card overflow-hidden group hover:shadow-2xl transition-all duration-300">
               <div className={`h-64 bg-gradient-to-br ${item.color} relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                   <div className="transform scale-0 group-hover:scale-100 transition-transform duration-300">
                     <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -68,9 +68,14 @@ const Gallery = () => {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">{item.date}</span>
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">{item.title}</h3>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="flex items-center text-slate-600">
+                    <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    {item.date}
+                  </span>
                   <span className="text-xs bg-primary-100 text-primary-700 px-3 py-1 rounded-full font-medium">
                     {categories.find(c => c.id === item.category)?.name}
                   </span>
@@ -81,16 +86,16 @@ const Gallery = () => {
         </div>
 
         {filteredItems.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Tidak ada kegiatan dalam kategori ini</p>
+          <div className="text-center py-16">
+            <p className="text-slate-500 text-lg">Tidak ada kegiatan dalam kategori ini</p>
           </div>
         )}
 
-        <div className="mt-12 text-center">
-          <div className="card p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Upload Foto Kegiatan</h3>
-            <p className="text-gray-600 mb-6">
-              Punya foto kegiatan kelas? Kirimkan ke koordinator dokumentasi untuk ditampilkan di galeri
+        <div className="mt-12">
+          <div className="card p-8 bg-gradient-to-r from-primary-50 to-primary-100/50 border-2 border-primary-200">
+            <h3 className="text-2xl font-bold mb-4 text-slate-900">Upload Foto Kegiatan</h3>
+            <p className="text-slate-700 mb-6">
+              Punya foto kegiatan kelas yang ingin dibagikan? Hubungi koordinator dokumentasi untuk ditampilkan di galeri
             </p>
             <button className="btn-primary">
               Hubungi Koordinator

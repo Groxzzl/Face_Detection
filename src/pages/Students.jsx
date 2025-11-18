@@ -47,47 +47,55 @@ const Students = () => {
   );
 
   return (
-    <div className="py-12 bg-gray-50">
+    <div className="py-16 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Daftar Siswa</h1>
-          <p className="text-xl text-gray-600">Kelas XI TJKT 1 - Total {students.length} Siswa</p>
+          <h1 className="section-title mb-2">Daftar Siswa</h1>
+          <p className="section-subtitle">Kelas XI TJKT 1 - Total <span className="font-bold text-primary-600">{students.length}</span> Siswa</p>
         </div>
 
-        <div className="mb-8">
+        <div className="mb-12">
           <div className="max-w-md mx-auto">
-            <input
-              type="text"
-              placeholder="Cari nama siswa..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
+            <div className="relative">
+              <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Cari nama siswa..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 bg-white"
+              />
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredStudents.map((student) => (
-            <div key={student.id} className="card p-6 hover:scale-105 transition-transform duration-200">
-              <div className="flex items-center mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white text-xl font-bold mr-4">
+            <div key={student.id} className="card p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+              <div className="flex items-center mb-5">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white text-sm font-bold mr-4 group-hover:shadow-lg transition-all duration-300">
                   {student.name.split(' ').map(n => n[0]).join('')}
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">{student.name}</h3>
-                  <p className="text-sm text-primary-600 font-medium">{student.role}</p>
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-slate-900 leading-tight">{student.name}</h3>
+                  <p className="text-xs text-primary-600 font-medium bg-primary-50 w-fit px-2.5 py-1 rounded-lg mt-1">{student.role}</p>
                 </div>
               </div>
-              <div className="border-t pt-4">
-                <p className="text-sm text-gray-600 italic">"{student.motto}"</p>
+              <div className="border-t border-slate-100 pt-4">
+                <p className="text-sm text-slate-700 italic">"{student.motto}"</p>
               </div>
             </div>
           ))}
         </div>
 
         {filteredStudents.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Tidak ada siswa yang ditemukan</p>
+          <div className="text-center py-16">
+            <svg className="w-16 h-16 text-slate-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <p className="text-slate-500 text-lg">Tidak ada siswa yang ditemukan</p>
           </div>
         )}
       </div>
