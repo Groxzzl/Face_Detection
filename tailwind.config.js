@@ -8,13 +8,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-        display: ['"Outfit"', 'sans-serif'],
+        sans: ['"Space Grotesk"', 'sans-serif'],
+        display: ['"Space Grotesk"', 'sans-serif'],
       },
       colors: {
-        // Premium Dark Theme Palette
-        background: '#050505',
-        surface: '#121212',
+        // Futuristic Dark Theme Palette
+        background: '#030014', // Deep space blue/black
+        surface: '#0f0728', // Slightly lighter space blue
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -47,12 +47,14 @@ export default {
         'glass-sm': '0 4px 16px 0 rgba(0, 0, 0, 0.2)',
         'glass-lg': '0 12px 40px 0 rgba(0, 0, 0, 0.45)',
         'neon': '0 0 20px rgba(14, 165, 233, 0.5), 0 0 40px rgba(14, 165, 233, 0.3)',
+        'neon-purple': '0 0 20px rgba(217, 70, 239, 0.5), 0 0 40px rgba(217, 70, 239, 0.3)',
       },
       animation: {
         'blob': 'blob 10s infinite',
         'float': 'float 6s ease-in-out infinite',
         'fade-in': 'fadeIn 0.5s ease-out forwards',
         'slide-up': 'slideUp 0.5s ease-out forwards',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         blob: {

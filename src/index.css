@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,8 +9,13 @@
     @apply bg-background text-slate-100 font-sans antialiased selection:bg-primary-500 selection:text-white overflow-x-hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
   }
 
   html {
@@ -22,27 +27,42 @@
   .glass-panel {
     @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass rounded-3xl;
   }
-  
+
   .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass-sm hover:shadow-glass-lg hover:bg-white/10 transition-all duration-500 rounded-2xl hover:-translate-y-1;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass-sm transition-all duration-500 rounded-2xl;
   }
 
   .glass-btn {
-    @apply bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 hover:shadow-neon hover:border-primary-500/30;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2;
   }
 
   .glass-btn-primary {
-    @apply bg-primary-600/80 hover:bg-primary-500 backdrop-blur-md text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40 active:scale-95 flex items-center justify-center gap-2 border border-primary-400/20;
+    @apply bg-primary-600/80 backdrop-blur-md text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-primary-500/20 active:scale-95 flex items-center justify-center gap-2 border border-primary-400/20;
   }
-  
+
+  /* Hover effects only for devices that support hover */
+  @media (hover: hover) {
+    .glass-card:hover {
+      @apply shadow-glass-lg bg-white/10 -translate-y-1;
+    }
+
+    .glass-btn:hover {
+      @apply bg-white/10 shadow-neon border-primary-500/30;
+    }
+
+    .glass-btn-primary:hover {
+      @apply bg-primary-500 shadow-primary-500/40;
+    }
+  }
+
   .section-title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight mb-6;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-200 to-primary-400 tracking-tighter mb-6;
   }
 
   .section-subtitle {
-    @apply text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light;
+    @apply text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light tracking-wide;
   }
-  
+
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
@@ -71,13 +91,13 @@
 }
 
 .mesh-bg {
-  background-color: #000000;
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%),
-    radial-gradient(at 80% 50%, hsla(280, 50%, 15%, 1) 0, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(220, 50%, 15%, 1) 0, transparent 50%);
+  background-color: #030014;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 20%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 20%, 1) 0, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(280, 50%, 10%, 1) 0, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(220, 50%, 10%, 1) 0, transparent 50%);
   position: fixed;
   top: 0;
   left: 0;
@@ -88,8 +108,8 @@
 
 .blob {
   position: absolute;
-  filter: blur(60px);
+  filter: blur(80px);
   z-index: -1;
-  opacity: 0.5;
+  opacity: 0.4;
   animation: blob 15s infinite alternate;
 }
