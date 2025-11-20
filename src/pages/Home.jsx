@@ -1,145 +1,176 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Users, Trophy, Network, ArrowRight, Calendar, MapPin } from 'lucide-react';
 
 const Home = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div>
-      <section className="relative overflow-hidden py-20 md:py-32">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-600/10 via-transparent to-primary-700/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">
-              Selamat Datang di <span className="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">Kelas XI TJKT 1</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 mb-8">
+    <div className="overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-primary-600/20 blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-purple-600/20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-block py-1 px-3 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-6 backdrop-blur-sm">
               SMK NU Hasyim Asyari
-            </p>
-            <p className="text-lg mb-8 max-w-3xl mx-auto text-slate-700 leading-relaxed">
-              Teknik Jaringan Komputer dan Telekomunikasi - Kelas yang solid, kompak, dan berprestasi
+            </span>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight">
+              Kelas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-purple-400">XI TJKT 1</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+              Membangun masa depan digital dengan keahlian Teknik Jaringan Komputer dan Telekomunikasi.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/profile" className="btn-primary bg-gradient-to-r from-primary-600 to-primary-700 hover:shadow-lg">
-                Lihat Profil Kelas
+              <Link to="/profile" className="btn-primary text-lg px-8 py-4 group">
+                Lihat Profil
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/students" className="btn-secondary hover:bg-slate-200">
+              <Link to="/students" className="px-8 py-4 rounded-xl bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-all duration-300 font-semibold flex items-center justify-center gap-2 backdrop-blur-sm">
                 Daftar Siswa
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      {/* Stats Section */}
+      <section className="py-20 bg-white relative z-10 -mt-10 rounded-t-[3rem]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="section-title text-center mb-4">Tentang Kelas Kami</h2>
-          <p className="section-subtitle text-center max-w-2xl mx-auto mb-16">Komitmen kami dalam mengembangkan potensi setiap siswa</p>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            <motion.div variants={itemVariants} className="glass-card p-8 text-center group hover:-translate-y-2 transition-transform duration-300">
+              <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Users className="w-8 h-8 text-primary-600" />
+              </div>
+              <h3 className="text-4xl font-bold text-slate-900 mb-2">36</h3>
+              <p className="text-slate-500 font-medium">Siswa Berbakat</p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="glass-card p-8 text-center group hover:-translate-y-2 transition-transform duration-300">
+              <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Trophy className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-4xl font-bold text-slate-900 mb-2">15+</h3>
+              <p className="text-slate-500 font-medium">Penghargaan</p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="glass-card p-8 text-center group hover:-translate-y-2 transition-transform duration-300">
+              <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Network className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-4xl font-bold text-slate-900 mb-2">100%</h3>
+              <p className="text-slate-500 font-medium">Dedikasi</p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Recent Activities */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="section-title">Kegiatan Terbaru</h2>
+            <p className="section-subtitle">Momen-momen berharga dalam perjalanan pembelajaran kami</p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card p-8 text-center hover:scale-105 transition-transform duration-300">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">36 Siswa</h3>
-              <p className="text-slate-600">Siswa-siswi berprestasi dan berbakat dari berbagai latar belakang</p>
-            </div>
-
-            <div className="card p-8 text-center hover:scale-105 transition-transform duration-300">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Berprestasi</h3>
-              <p className="text-slate-600">Aktif dalam berbagai kompetisi, lomba, dan kegiatan akademik</p>
-            </div>
-
-            <div className="card p-8 text-center hover:scale-105 transition-transform duration-300">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Networking</h3>
-              <p className="text-slate-600">Fokus pada teknologi jaringan dan telekomunikasi modern</p>
-            </div>
+            {[
+              {
+                title: "Praktikum Jaringan",
+                desc: "Konfigurasi router dan switch di lab komputer modern.",
+                date: "15 Nov 2025",
+                color: "from-blue-500 to-blue-600"
+              },
+              {
+                title: "Kunjungan Industri",
+                desc: "Study tour ke Data Center Telkom Indonesia.",
+                date: "10 Nov 2025",
+                color: "from-purple-500 to-purple-600"
+              },
+              {
+                title: "Juara LKS",
+                desc: "Meraih juara 2 Lomba Kompetensi Siswa tingkat Provinsi.",
+                date: "05 Nov 2025",
+                color: "from-emerald-500 to-emerald-600"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              >
+                <div className={`h-48 bg-gradient-to-br ${item.color} relative overflow-hidden`}>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                    <Calendar className="w-4 h-4" />
+                    <span>{item.date}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">{item.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </div>
-      </section>
 
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="section-title text-center mb-4">Kegiatan Terbaru</h2>
-          <p className="section-subtitle text-center max-w-2xl mx-auto mb-16">Dokumentasi momen-momen berharga kelas kami</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="card overflow-hidden group hover:shadow-2xl transition-all duration-300">
-              <div className="h-56 bg-gradient-to-br from-blue-500 to-blue-600 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">Praktikum Jaringan</h3>
-                <p className="text-slate-600 mb-4 text-sm">Praktikum konfigurasi router dan switch di lab komputer dengan peralatan modern</p>
-                <span className="text-sm text-primary-600 font-medium flex items-center">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  15 November 2025
-                </span>
-              </div>
-            </div>
-
-            <div className="card overflow-hidden group hover:shadow-2xl transition-all duration-300">
-              <div className="h-56 bg-gradient-to-br from-green-500 to-green-600 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">Study Tour</h3>
-                <p className="text-slate-600 mb-4 text-sm">Kunjungan edukatif ke perusahaan IT dan data center untuk memperluas wawasan</p>
-                <span className="text-sm text-primary-600 font-medium flex items-center">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  10 November 2025
-                </span>
-              </div>
-            </div>
-
-            <div className="card overflow-hidden group hover:shadow-2xl transition-all duration-300">
-              <div className="h-56 bg-gradient-to-br from-purple-500 to-purple-600 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">Lomba Networking</h3>
-                <p className="text-slate-600 mb-4 text-sm">Juara 2 Lomba Konfigurasi Jaringan tingkat Provinsi - Pencapaian membanggakan</p>
-                <span className="text-sm text-primary-600 font-medium flex items-center">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  5 November 2025
-                </span>
-              </div>
-            </div>
-          </div>
           <div className="text-center mt-12">
-            <Link to="/gallery" className="btn-primary">
-              Lihat Galeri Lengkap
+            <Link to="/gallery" className="btn-secondary inline-flex items-center gap-2">
+              Lihat Semua Kegiatan
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-primary-600 to-primary-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Motto Kelas</h2>
-          <p className="text-2xl md:text-3xl font-semibold italic mb-8 text-primary-100">
-            "Bersama Membangun Jaringan, Bersama Meraih Prestasi"
+      {/* CTA Section */}
+      <section className="py-20 bg-slate-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-10"></div>
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Siap Menjadi Bagian dari Masa Depan?</h2>
+          <p className="text-slate-400 text-lg mb-8">
+            Bergabunglah dengan kami dalam mengeksplorasi dunia teknologi yang tanpa batas.
           </p>
-          <p className="text-lg text-primary-100 max-w-3xl mx-auto leading-relaxed">
-            Kami adalah keluarga besar yang saling mendukung dalam belajar dan berkembang di bidang teknologi jaringan komputer dan telekomunikasi. Bersama kita wujudkan impian dan raih kesuksesan.
-          </p>
+          <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+            Hubungi Kami
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
     </div>

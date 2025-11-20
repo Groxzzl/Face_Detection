@@ -1,105 +1,121 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Home, User, Users, Image, Calendar, Bell, Phone } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navLinks = [
-    { path: '/', label: 'Beranda' },
-    { path: '/profile', label: 'Profil' },
-    { path: '/students', label: 'Siswa' },
-    { path: '/gallery', label: 'Galeri' },
-    { path: '/schedule', label: 'Jadwal' },
-    { path: '/announcements', label: 'Pengumuman' },
-    { path: '/contact', label: 'Kontak' },
+    { path: '/', label: 'Beranda', icon: Home },
+    { path: '/profile', label: 'Profil', icon: User },
+    { path: '/students', label: 'Siswa', icon: Users },
+    { path: '/gallery', label: 'Galeri', icon: Image },
+    { path: '/schedule', label: 'Jadwal', icon: Calendar },
+    { path: '/announcements', label: 'Pengumuman', icon: Bell },
+    { path: '/contact', label: 'Kontak', icon: Phone },
   ];
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-100/50 shadow-sm">
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/80 backdrop-blur-lg border-b border-slate-200/50 shadow-sm' : 'bg-transparent'
+        }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:shadow-primary-500/40 transition-all duration-300">
                 <span className="text-white font-bold text-lg">XI</span>
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold text-slate-900">TJKT 1</h1>
-                <p className="text-xs text-slate-500">SMK NU Hasyim Asyari</p>
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">TJKT 1</h1>
+                <p className="text-xs text-slate-500 font-medium">SMK NU Hasyim Asyari</p>
               </div>
             </Link>
           </div>
 
-          <div className="hidden md:flex space-x-1">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  isActive(link.path)
-                    ? 'bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 shadow-sm'
+                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${isActive(link.path)
+                    ? 'text-primary-600 bg-primary-50'
                     : 'text-slate-600 hover:text-primary-600 hover:bg-slate-50'
-                }`}
+                  }`}
               >
                 {link.label}
+                {isActive(link.path) && (
+                  <motion.div
+                    layoutId="navbar-indicator"
+                    className="absolute inset-0 rounded-xl bg-primary-50 -z-10"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
               </Link>
             ))}
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none transition-colors duration-300"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
             >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden border-t border-slate-100">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gradient-to-b from-white to-slate-50">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={`block px-4 py-2.5 rounded-lg text-base font-medium transition-all duration-300 ${
-                  isActive(link.path)
-                    ? 'bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700'
-                    : 'text-slate-600 hover:bg-slate-100 hover:text-primary-600'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </nav>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-t border-slate-100 overflow-hidden"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-1">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${isActive(link.path)
+                        ? 'bg-primary-50 text-primary-600'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-primary-600'
+                      }`}
+                  >
+                    <Icon size={20} />
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 

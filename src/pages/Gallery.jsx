@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Calendar, Tag, Camera, ArrowRight } from 'lucide-react';
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const categories = [
     { id: 'all', name: 'Semua' },
@@ -26,83 +29,177 @@ const Gallery = () => {
     { id: 12, title: 'Kunjungan Industri', category: 'event', date: '10 Okt 2025', color: 'from-emerald-400 to-emerald-600' },
   ];
 
-  const filteredItems = selectedCategory === 'all' 
-    ? galleryItems 
+  const filteredItems = selectedCategory === 'all'
+    ? galleryItems
     : galleryItems.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="py-16 bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="section-title mb-2">Galeri Kegiatan</h1>
-          <p className="section-subtitle">Dokumentasi lengkap momen-momen bersejarah kelas kami</p>
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="section-title mb-4"
+          >
+            Galeri Kegiatan
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="section-subtitle"
+          >
+            Dokumentasi lengkap momen-momen bersejarah kelas kami
+          </motion.p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-2.5 rounded-xl font-medium transition-all duration-300 ${
-                selectedCategory === category.id
-                  ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg scale-105'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 hover:shadow-md'
-              } border ${selectedCategory === category.id ? 'border-primary-600' : 'border-slate-200'}`}
+              className={`px-6 py-2.5 rounded-xl font-medium transition-all duration-300 ${selectedCategory === category.id
+                  ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30 scale-105'
+                  : 'bg-white text-slate-600 hover:bg-slate-50 hover:text-primary-600 shadow-sm'
+                }`}
             >
               {category.name}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredItems.map((item) => (
-            <div key={item.id} className="card overflow-hidden group hover:shadow-2xl transition-all duration-300">
-              <div className={`h-64 bg-gradient-to-br ${item.color} relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                  <div className="transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                    <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredItems.map((item) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -5 }}
+                key={item.id}
+                onClick={() => setSelectedImage(item)}
+                className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              >
+                <div className={`h-64 bg-gradient-to-br ${item.color} relative overflow-hidden`}>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <motion.div
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileHover={{ scale: 1, opacity: 1 }}
+                      className="bg-white/20 backdrop-blur-md p-3 rounded-full"
+                    >
+                      <Camera className="w-8 h-8 text-white" />
+                    </motion.div>
                   </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">{item.title}</h3>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="flex items-center text-slate-600">
-                    <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    {item.date}
-                  </span>
-                  <span className="text-xs bg-primary-100 text-primary-700 px-3 py-1 rounded-full font-medium">
-                    {categories.find(c => c.id === item.category)?.name}
-                  </span>
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-primary-600 transition-colors">{item.title}</h3>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="flex items-center text-slate-500">
+                      <Calendar className="w-4 h-4 mr-1.5" />
+                      {item.date}
+                    </span>
+                    <span className="flex items-center text-xs font-medium bg-primary-50 text-primary-700 px-3 py-1 rounded-full">
+                      <Tag className="w-3 h-3 mr-1" />
+                      {categories.find(c => c.id === item.category)?.name}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {filteredItems.length === 0 && (
-          <div className="text-center py-16">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
             <p className="text-slate-500 text-lg">Tidak ada kegiatan dalam kategori ini</p>
-          </div>
+          </motion.div>
         )}
 
-        <div className="mt-12">
-          <div className="card p-8 bg-gradient-to-r from-primary-50 to-primary-100/50 border-2 border-primary-200">
-            <h3 className="text-2xl font-bold mb-4 text-slate-900">Upload Foto Kegiatan</h3>
-            <p className="text-slate-700 mb-6">
-              Punya foto kegiatan kelas yang ingin dibagikan? Hubungi koordinator dokumentasi untuk ditampilkan di galeri
-            </p>
-            <button className="btn-primary">
-              Hubungi Koordinator
-            </button>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12"
+        >
+          <div className="relative overflow-hidden rounded-3xl bg-primary-600 p-8 md:p-12 text-center text-white">
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-10"></div>
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Punya Foto Kegiatan?</h3>
+              <p className="text-primary-100 mb-8 text-lg">
+                Bagikan momen seru kelas kita! Hubungi tim dokumentasi untuk menambahkan foto ke galeri.
+              </p>
+              <button className="bg-white text-primary-600 px-8 py-3 rounded-xl font-bold hover:bg-primary-50 transition-colors inline-flex items-center gap-2">
+                Hubungi Tim Dokumentasi
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className={`h-96 md:h-[500px] bg-gradient-to-br ${selectedImage.color} flex items-center justify-center`}>
+                {/* Placeholder for actual image */}
+                <Camera className="w-32 h-32 text-white/50" />
+              </div>
+
+              <div className="p-6 md:p-8">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full uppercase tracking-wider">
+                    {categories.find(c => c.id === selectedImage.category)?.name}
+                  </span>
+                  <span className="text-slate-500 text-sm flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    {selectedImage.date}
+                  </span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">{selectedImage.title}</h3>
+                <p className="text-slate-600">
+                  Dokumentasi kegiatan {selectedImage.title} yang dilaksanakan pada tanggal {selectedImage.date}.
+                  Kegiatan ini diikuti oleh seluruh siswa dengan antusias.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
