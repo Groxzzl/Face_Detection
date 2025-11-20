@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
           {/* Brand Section */}
           <div className="space-y-6">
-            <Link to="/" className="text-3xl font-display font-bold tracking-tighter bg-gradient-to-r from-white to-primary-400 bg-clip-text text-transparent inline-block">
-              Class<span className="text-primary-400">X</span>
+            <Link to="/" className="text-3xl font-display font-bold tracking-tighter text-white inline-block">
+              <span className="font-futuristic">XI TJKT 1</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Membangun generasi teknisi jaringan yang kompeten, berkarakter, dan siap menghadapi tantangan industri masa depan.
@@ -71,7 +71,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} ClassX. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} XI TJKT 1. All rights reserved.</p>
           <p>Designed with <span className="text-red-500 animate-pulse">❤</span> for the future.</p>
         </div>
       </div>
