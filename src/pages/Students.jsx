@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, User, Award, Quote, Terminal, Filter, ChevronDown } from 'lucide-react';
+import { Search, User, Award, Quote, Filter, ChevronDown } from 'lucide-react';
 
 const Students = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -93,15 +93,12 @@ const Students = () => {
           className="mb-12 max-w-2xl mx-auto"
         >
           {/* Terminal-style Search & Filter Bar */}
-          <div className="glass-panel p-1.5 md:p-2 flex flex-col md:flex-row gap-2 bg-black/40 border-primary-500/20 shadow-neon">
+          <div className="glass-panel p-1.5 md:p-2 flex flex-col md:flex-row gap-2">
             <div className="relative flex-1">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Terminal className="h-5 w-5 text-primary-500" />
-              </div>
               <input
                 type="text"
-                className="block w-full pl-10 pr-3 py-3 bg-black/20 border border-white/5 rounded-xl text-primary-100 placeholder-primary-500/50 focus:outline-none focus:ring-1 focus:ring-primary-500/50 focus:border-primary-500/50 sm:text-sm font-mono transition-all"
-                placeholder="> search_student..."
+                className="block w-full px-3 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-primary-500/50 text-sm"
+                placeholder="Cari siswa..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

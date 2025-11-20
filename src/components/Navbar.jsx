@@ -45,8 +45,8 @@ const Navbar = () => {
         <div className="container-custom">
           <div className={`glass-panel px-6 py-3 flex items-center justify-between transition-all duration-300 ${scrolled ? 'bg-black/40 backdrop-blur-xl border-white/5' : 'bg-white/5 border-white/10'
             }`}>
-            <Link to="/" className="text-2xl font-display font-bold tracking-tighter bg-gradient-to-r from-white to-primary-400 bg-clip-text text-transparent">
-              Class<span className="text-primary-400">X</span>
+            <Link to="/" className="text-2xl font-display font-bold tracking-tighter text-white">
+              <span className="font-futuristic">XI TJKT 1</span>
             </Link>
 
             <div className="flex items-center gap-1">
@@ -57,8 +57,8 @@ const Navbar = () => {
                     key={item.path}
                     to={item.path}
                     className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${active
-                        ? 'text-white bg-white/10 shadow-glass-sm'
-                        : 'text-slate-400 hover:text-white hover:bg-white/5'
+                      ? 'text-white bg-white/10 shadow-glass-sm'
+                      : 'text-slate-400 hover:text-white hover:bg-white/5'
                       }`}
                   >
                     {item.name}
@@ -86,7 +86,7 @@ const Navbar = () => {
         }`}>
         <div className="container-custom flex justify-between items-center">
           <Link to="/" className="text-xl font-display font-bold tracking-tighter text-white">
-            Class<span className="text-primary-400">X</span>
+            <span className="font-futuristic">XI TJKT 1</span>
           </Link>
           <Link to="/profile" className="p-2 rounded-full bg-white/5 border border-white/10">
             <User size={20} className="text-white" />
