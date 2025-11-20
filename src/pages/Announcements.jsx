@@ -121,7 +121,7 @@ const Announcements = () => {
             transition={{ delay: 0.2 }}
             className="section-subtitle"
           >
-            Informasi terbaru dan penting untuk Kelas XI TJKT 1
+            Informasi terbaru dan penting untuk <span className="font-futuristic">Kelas XI TJKT 1</span>
           </motion.p>
         </div>
 
@@ -130,7 +130,7 @@ const Announcements = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300"
+            className="glass-card p-4 md:p-6 text-center hover:scale-105 transition-transform duration-300"
           >
             <div className="w-14 h-14 bg-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-red-500/30">
               <AlertCircle className="w-7 h-7 text-red-400" />
@@ -145,7 +145,7 @@ const Announcements = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300"
+            className="glass-card p-4 md:p-6 text-center hover:scale-105 transition-transform duration-300"
           >
             <div className="w-14 h-14 bg-yellow-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-yellow-500/30">
               <Info className="w-7 h-7 text-yellow-400" />
@@ -160,7 +160,7 @@ const Announcements = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300"
+            className="glass-card p-4 md:p-6 text-center hover:scale-105 transition-transform duration-300"
           >
             <div className="w-14 h-14 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-green-500/30">
               <CheckCircle className="w-7 h-7 text-green-400" />
@@ -179,7 +179,7 @@ const Announcements = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="glass-card p-6 hover:border-primary-500/30 transition-all duration-300 group"
+              className="glass-card p-4 md:p-6 hover:border-primary-500/30 transition-all duration-300 group"
             >
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
                 <div className="flex-1">
@@ -210,7 +210,7 @@ const Announcements = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-panel p-8 border border-primary-500/30 relative overflow-hidden"
+          className="glass-panel p-5 md:p-8 border border-primary-500/30 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl"></div>
           <div className="relative z-10 text-center">

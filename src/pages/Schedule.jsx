@@ -1,4 +1,11 @@
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Clock, MapPin, User, Calendar, Info, AlertCircle } from 'lucide-react';
+
 const Schedule = () => {
+  const [currentDayIndex, setCurrentDayIndex] = useState(-1);
+  const [activeClassIndex, setActiveClassIndex] = useState({ day: -1, class: -1 });
+
   const schedule = [
     {
       day: 'Senin',
@@ -46,98 +53,179 @@ const Schedule = () => {
     },
   ];
 
+  useEffect(() => {
+    const checkTime = () => {
+      const now = new Date();
+      const day = now.getDay(); // 0 = Sunday, 1 = Monday
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const currentTime = hours * 60 + minutes;
+
+      // Adjust day to match schedule array (0 = Monday)
+      const scheduleDayIndex = day - 1;
+      setCurrentDayIndex(scheduleDayIndex);
+
+      if (scheduleDayIndex >= 0 && scheduleDayIndex < schedule.length) {
+        const todayClasses = schedule[scheduleDayIndex].classes;
+        let activeIndex = -1;
+
+        todayClasses.forEach((cls, index) => {
+          const [start, end] = cls.time.split(' - ');
+          const [startH, startM] = start.split(':').map(Number);
+          const [endH, endM] = end.split(':').map(Number);
+
+          const startTime = startH * 60 + startM;
+          const endTime = endH * 60 + endM;
+
+          if (currentTime >= startTime && currentTime < endTime) {
+            activeIndex = index;
+          }
+        });
+
+        setActiveClassIndex({ day: scheduleDayIndex, class: activeIndex });
+      } else {
+        setActiveClassIndex({ day: -1, class: -1 });
+      }
+    };
+
+    checkTime();
+    const interval = setInterval(checkTime, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, []);
+
   const colors = [
-    'bg-gradient-to-r from-blue-500/20 to-blue-600/20 border-blue-500/30',
-    'bg-gradient-to-r from-green-500/20 to-green-600/20 border-green-500/30',
-    'bg-gradient-to-r from-purple-500/20 to-purple-600/20 border-purple-500/30',
-    'bg-gradient-to-r from-pink-500/20 to-pink-600/20 border-pink-500/30',
-    'bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 border-yellow-500/30',
+    'from-blue-500 to-cyan-500',
+    'from-emerald-500 to-teal-500',
+    'from-violet-500 to-purple-500',
+    'from-pink-500 to-rose-500',
+    'from-amber-500 to-orange-500',
   ];
 
   return (
-    <div className="py-24">
+    <div className="py-24 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="section-title mb-2">Jadwal Pelajaran</h1>
-          <p className="section-subtitle">Kelas XI TJKT 1 - Tahun Ajaran 2025/2026</p>
+          <p className="section-subtitle"><span className="font-futuristic">Kelas XI TJKT 1</span> - Tahun Ajaran 2025/2026</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
-          {schedule.map((day, dayIndex) => (
-            <div key={day.day} className="glass-card p-6 hover:shadow-glass-lg transition-all duration-300">
-              <div className={`${colors[dayIndex]} border-l-4 px-4 py-3 rounded-xl mb-4 font-bold text-white text-lg`}>
-                {day.day}
-              </div>
-              <div className="space-y-3">
-                {day.classes.map((classItem, index) => (
-                  <div key={index} className="bg-white/5 p-4 rounded-xl border border-white/10 hover:bg-white/10 hover:border-primary-500/30 transition-all duration-300">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold text-white text-sm leading-tight pr-2">{classItem.subject}</h3>
-                      <span className="text-xs bg-primary-500/20 text-primary-300 px-2.5 py-1 rounded-lg whitespace-nowrap font-medium border border-primary-500/30">
-                        {classItem.room}
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-300 mb-1.5 font-medium">{classItem.teacher}</p>
-                    <p className="text-xs text-slate-400 flex items-center">
-                      <svg className="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {classItem.time}
-                    </p>
+          {schedule.map((day, dayIndex) => {
+            const isToday = currentDayIndex === dayIndex;
+
+            return (
+              <motion.div
+                key={day.day}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: dayIndex * 0.1 }}
+                className={`glass-card p-4 md:p-6 transition-all duration-500 relative overflow-hidden ${isToday ? 'border-primary-500/50 shadow-neon' : ''}`}
+              >
+                {isToday && (
+                  <div className="absolute top-0 right-0 bg-primary-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl z-10 animate-pulse">
+                    HARI INI
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                )}
+
+                <div className={`bg-gradient-to-r ${colors[dayIndex]} h-1.5 w-full absolute top-0 left-0`} />
+
+                <div className="flex items-center justify-between mb-6 mt-2">
+                  <h2 className={`text-2xl font-bold ${isToday ? 'text-white' : 'text-slate-300'}`}>
+                    {day.day}
+                  </h2>
+                  <Calendar className={`w-5 h-5 ${isToday ? 'text-primary-400' : 'text-slate-500'}`} />
+                </div>
+
+                <div className="space-y-4">
+                  {day.classes.map((classItem, index) => {
+                    const isActive = activeClassIndex.day === dayIndex && activeClassIndex.class === index;
+
+                    return (
+                      <div
+                        key={index}
+                        className={`relative p-4 rounded-xl border transition-all duration-300 ${isActive
+                          ? 'bg-primary-500/20 border-primary-500/50 shadow-lg shadow-primary-500/10'
+                          : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10'
+                          }`}
+                      >
+                        {isActive && (
+                          <div className="absolute -right-1 -top-1 w-3 h-3 bg-green-500 rounded-full animate-ping" />
+                        )}
+
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className={`font-semibold text-sm leading-tight pr-2 ${isActive ? 'text-white' : 'text-slate-200'}`}>
+                            {classItem.subject}
+                          </h3>
+                          <span className={`text-xs px-2 py-0.5 rounded-md font-medium whitespace-nowrap ${isActive
+                            ? 'bg-primary-500 text-white'
+                            : 'bg-white/10 text-slate-400'
+                            }`}>
+                            {classItem.room}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-4 text-xs text-slate-400">
+                          <div className="flex items-center gap-1.5">
+                            <User className="w-3 h-3" />
+                            <span>{classItem.teacher}</span>
+                          </div>
+                          <div className={`flex items-center gap-1.5 ${isActive ? 'text-primary-300 font-bold' : ''}`}>
+                            <Clock className="w-3 h-3" />
+                            <span>{classItem.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="glass-card p-6 hover:shadow-glass-lg transition-all duration-300">
-            <h3 className="text-lg font-bold mb-4 flex items-center text-white">
-              <svg className="w-6 h-6 mr-2 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+          <div className="glass-card p-4 md:p-6">
+            <h3 className="text-lg font-bold mb-4 flex items-center text-white gap-2">
+              <Info className="w-5 h-5 text-primary-400" />
               Informasi Penting
             </h3>
-            <ul className="space-y-2.5 text-slate-300 text-sm">
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2.5 font-bold">•</span>
-                <span>Jam masuk: 07:00 WIB</span>
+            <ul className="space-y-3 text-slate-300 text-sm">
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-1.5" />
+                <span>Jam masuk: <span className="text-white font-medium">07:00 WIB</span> (Diharapkan hadir 15 menit sebelumnya)</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2.5 font-bold">•</span>
-                <span>Istirahat 1: 10:00 - 10:15 WIB</span>
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-1.5" />
+                <span>Istirahat 1: <span className="text-white font-medium">10:00 - 10:15 WIB</span></span>
               </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2.5 font-bold">•</span>
-                <span>Istirahat 2: 11:45 - 12:30 WIB</span>
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-1.5" />
+                <span>Istirahat 2: <span className="text-white font-medium">11:45 - 12:30 WIB</span> (Sholat Dzuhur)</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2.5 font-bold">•</span>
-                <span>Setiap jam pelajaran: 90 menit</span>
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-1.5" />
+                <span>Durasi per jam pelajaran: <span className="text-white font-medium">45 menit</span></span>
               </li>
             </ul>
           </div>
 
-          <div className="glass-card p-6 hover:shadow-glass-lg transition-all duration-300">
-            <h3 className="text-lg font-bold mb-4 flex items-center text-white">
-              <svg className="w-6 h-6 mr-2 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-              </svg>
+          <div className="glass-card p-4 md:p-6">
+            <h3 className="text-lg font-bold mb-4 flex items-center text-white gap-2">
+              <AlertCircle className="w-5 h-5 text-amber-400" />
               Catatan
             </h3>
-            <ul className="space-y-2.5 text-slate-300 text-sm">
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2.5 font-bold">•</span>
-                <span>Praktikum wajib menggunakan seragam praktikum</span>
+            <ul className="space-y-3 text-slate-300 text-sm">
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5" />
+                <span>Praktikum wajib menggunakan <strong>Wearpack / Seragam Jurusan</strong>.</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2.5 font-bold">•</span>
-                <span>Bawa laptop untuk mata pelajaran praktikum</span>
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5" />
+                <span>Bawa laptop pribadi (jika ada) untuk mata pelajaran produktif.</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2.5 font-bold">•</span>
-                <span>Jadwal dapat berubah sewaktu-waktu</span>
+              <li className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5" />
+                <span>Jadwal dapat berubah sewaktu-waktu menyesuaikan agenda sekolah.</span>
               </li>
             </ul>
           </div>

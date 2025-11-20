@@ -1,52 +1,57 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, User, Award, Quote } from 'lucide-react';
+import { Search, User, Award, Quote, Terminal, Filter, ChevronDown } from 'lucide-react';
 
 const Students = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState('all'); // 'all', 'officers', 'members'
 
   const students = [
-    { id: 1, name: 'Ahmad Rizki', role: 'Ketua Kelas', motto: 'Belajar tanpa henti', color: 'from-blue-500 to-blue-600' },
-    { id: 2, name: 'Siti Nurhaliza', role: 'Wakil Ketua', motto: 'Semangat pantang menyerah', color: 'from-purple-500 to-purple-600' },
-    { id: 3, name: 'Dewi Lestari', role: 'Sekretaris', motto: 'Teliti dan teratur', color: 'from-pink-500 to-pink-600' },
-    { id: 4, name: 'Budi Santoso', role: 'Bendahara', motto: 'Jujur dan amanah', color: 'from-green-500 to-green-600' },
-    { id: 5, name: 'Andi Pratama', role: 'Koordinator', motto: 'Kerja keras dan cerdas', color: 'from-orange-500 to-orange-600' },
-    { id: 6, name: 'Rina Wati', role: 'Anggota', motto: 'Berprestasi adalah kunci', color: 'from-indigo-500 to-indigo-600' },
-    { id: 7, name: 'Dimas Aditya', role: 'Anggota', motto: 'Networking is everything', color: 'from-teal-500 to-teal-600' },
-    { id: 8, name: 'Fitri Handayani', role: 'Anggota', motto: 'Belajar dengan hati', color: 'from-rose-500 to-rose-600' },
-    { id: 9, name: 'Reza Firmansyah', role: 'Anggota', motto: 'Tekun dan sabar', color: 'from-cyan-500 to-cyan-600' },
-    { id: 10, name: 'Nurul Azizah', role: 'Anggota', motto: 'Ilmu adalah cahaya', color: 'from-violet-500 to-violet-600' },
-    { id: 11, name: 'Fajar Ramadhan', role: 'Anggota', motto: 'Berusaha dan berdoa', color: 'from-amber-500 to-amber-600' },
-    { id: 12, name: 'Indah Permata', role: 'Anggota', motto: 'Sukses dimulai dari niat', color: 'from-fuchsia-500 to-fuchsia-600' },
-    { id: 13, name: 'Yoga Pratama', role: 'Anggota', motto: 'Konsisten adalah kunci', color: 'from-lime-500 to-lime-600' },
-    { id: 14, name: 'Ayu Lestari', role: 'Anggota', motto: 'Belajar dengan gembira', color: 'from-sky-500 to-sky-600' },
-    { id: 15, name: 'Hendra Gunawan', role: 'Anggota', motto: 'Pantang menyerah', color: 'from-red-500 to-red-600' },
-    { id: 16, name: 'Sari Rahayu', role: 'Anggota', motto: 'Rajin pangkal pandai', color: 'from-emerald-500 to-emerald-600' },
-    { id: 17, name: 'Arif Hidayat', role: 'Anggota', motto: 'Berani mencoba', color: 'from-yellow-500 to-yellow-600' },
-    { id: 18, name: 'Lina Marlina', role: 'Anggota', motto: 'Semangat belajar', color: 'from-purple-500 to-purple-600' },
-    { id: 19, name: 'Bayu Setiawan', role: 'Anggota', motto: 'Fokus dan disiplin', color: 'from-blue-500 to-blue-600' },
-    { id: 20, name: 'Eka Putri', role: 'Anggota', motto: 'Berpikir positif', color: 'from-pink-500 to-pink-600' },
-    { id: 21, name: 'Doni Saputra', role: 'Anggota', motto: 'Kerja keras berbuah manis', color: 'from-green-500 to-green-600' },
-    { id: 22, name: 'Maya Sari', role: 'Anggota', motto: 'Belajar dari kesalahan', color: 'from-orange-500 to-orange-600' },
-    { id: 23, name: 'Rizal Fauzi', role: 'Anggota', motto: 'Terus berkembang', color: 'from-indigo-500 to-indigo-600' },
-    { id: 24, name: 'Putri Ayu', role: 'Anggota', motto: 'Optimis meraih cita', color: 'from-teal-500 to-teal-600' },
-    { id: 25, name: 'Agus Salim', role: 'Anggota', motto: 'Belajar sepanjang hayat', color: 'from-rose-500 to-rose-600' },
-    { id: 26, name: 'Wulan Dari', role: 'Anggota', motto: 'Gigih dan ulet', color: 'from-cyan-500 to-cyan-600' },
-    { id: 27, name: 'Irfan Hakim', role: 'Anggota', motto: 'Berilmu dan beramal', color: 'from-violet-500 to-violet-600' },
-    { id: 28, name: 'Tari Wulandari', role: 'Anggota', motto: 'Sukses butuh perjuangan', color: 'from-amber-500 to-amber-600' },
-    { id: 29, name: 'Fikri Ramadhan', role: 'Anggota', motto: 'Belajar dengan ikhlas', color: 'from-fuchsia-500 to-fuchsia-600' },
-    { id: 30, name: 'Dina Mariana', role: 'Anggota', motto: 'Tekun dan teliti', color: 'from-lime-500 to-lime-600' },
-    { id: 31, name: 'Wahyu Hidayat', role: 'Anggota', motto: 'Berani bermimpi', color: 'from-sky-500 to-sky-600' },
-    { id: 32, name: 'Sinta Dewi', role: 'Anggota', motto: 'Rajin dan disiplin', color: 'from-red-500 to-red-600' },
-    { id: 33, name: 'Rian Pratama', role: 'Anggota', motto: 'Fokus pada tujuan', color: 'from-emerald-500 to-emerald-600' },
-    { id: 34, name: 'Nisa Aulia', role: 'Anggota', motto: 'Berprestasi untuk bangsa', color: 'from-yellow-500 to-yellow-600' },
-    { id: 35, name: 'Faisal Ahmad', role: 'Anggota', motto: 'Kerja cerdas', color: 'from-purple-500 to-purple-600' },
-    { id: 36, name: 'Laila Sari', role: 'Anggota', motto: 'Semangat juang tinggi', color: 'from-blue-500 to-blue-600' },
+    { id: 1, name: 'Ahmad Rizki', role: 'Ketua Kelas', motto: 'Belajar tanpa henti', color: 'from-blue-500 to-blue-600', type: 'officer' },
+    { id: 2, name: 'Siti Nurhaliza', role: 'Wakil Ketua', motto: 'Semangat pantang menyerah', color: 'from-purple-500 to-purple-600', type: 'officer' },
+    { id: 3, name: 'Dewi Lestari', role: 'Sekretaris', motto: 'Teliti dan teratur', color: 'from-pink-500 to-pink-600', type: 'officer' },
+    { id: 4, name: 'Budi Santoso', role: 'Bendahara', motto: 'Jujur dan amanah', color: 'from-green-500 to-green-600', type: 'officer' },
+    { id: 5, name: 'Andi Pratama', role: 'Koordinator', motto: 'Kerja keras dan cerdas', color: 'from-orange-500 to-orange-600', type: 'officer' },
+    { id: 6, name: 'Rina Wati', role: 'Anggota', motto: 'Berprestasi adalah kunci', color: 'from-indigo-500 to-indigo-600', type: 'member' },
+    { id: 7, name: 'Dimas Aditya', role: 'Anggota', motto: 'Networking is everything', color: 'from-teal-500 to-teal-600', type: 'member' },
+    { id: 8, name: 'Fitri Handayani', role: 'Anggota', motto: 'Belajar dengan hati', color: 'from-rose-500 to-rose-600', type: 'member' },
+    { id: 9, name: 'Reza Firmansyah', role: 'Anggota', motto: 'Tekun dan sabar', color: 'from-cyan-500 to-cyan-600', type: 'member' },
+    { id: 10, name: 'Nurul Azizah', role: 'Anggota', motto: 'Ilmu adalah cahaya', color: 'from-violet-500 to-violet-600', type: 'member' },
+    { id: 11, name: 'Fajar Ramadhan', role: 'Anggota', motto: 'Berusaha dan berdoa', color: 'from-amber-500 to-amber-600', type: 'member' },
+    { id: 12, name: 'Indah Permata', role: 'Anggota', motto: 'Sukses dimulai dari niat', color: 'from-fuchsia-500 to-fuchsia-600', type: 'member' },
+    { id: 13, name: 'Yoga Pratama', role: 'Anggota', motto: 'Konsisten adalah kunci', color: 'from-lime-500 to-lime-600', type: 'member' },
+    { id: 14, name: 'Ayu Lestari', role: 'Anggota', motto: 'Belajar dengan gembira', color: 'from-sky-500 to-sky-600', type: 'member' },
+    { id: 15, name: 'Hendra Gunawan', role: 'Anggota', motto: 'Pantang menyerah', color: 'from-red-500 to-red-600', type: 'member' },
+    { id: 16, name: 'Sari Rahayu', role: 'Anggota', motto: 'Rajin pangkal pandai', color: 'from-emerald-500 to-emerald-600', type: 'member' },
+    { id: 17, name: 'Arif Hidayat', role: 'Anggota', motto: 'Berani mencoba', color: 'from-yellow-500 to-yellow-600', type: 'member' },
+    { id: 18, name: 'Lina Marlina', role: 'Anggota', motto: 'Semangat belajar', color: 'from-purple-500 to-purple-600', type: 'member' },
+    { id: 19, name: 'Bayu Setiawan', role: 'Anggota', motto: 'Fokus dan disiplin', color: 'from-blue-500 to-blue-600', type: 'member' },
+    { id: 20, name: 'Eka Putri', role: 'Anggota', motto: 'Berpikir positif', color: 'from-pink-500 to-pink-600', type: 'member' },
+    { id: 21, name: 'Doni Saputra', role: 'Anggota', motto: 'Kerja keras berbuah manis', color: 'from-green-500 to-green-600', type: 'member' },
+    { id: 22, name: 'Maya Sari', role: 'Anggota', motto: 'Belajar dari kesalahan', color: 'from-orange-500 to-orange-600', type: 'member' },
+    { id: 23, name: 'Rizal Fauzi', role: 'Anggota', motto: 'Terus berkembang', color: 'from-indigo-500 to-indigo-600', type: 'member' },
+    { id: 24, name: 'Putri Ayu', role: 'Anggota', motto: 'Optimis meraih cita', color: 'from-teal-500 to-teal-600', type: 'member' },
+    { id: 25, name: 'Agus Salim', role: 'Anggota', motto: 'Belajar sepanjang hayat', color: 'from-rose-500 to-rose-600', type: 'member' },
+    { id: 26, name: 'Wulan Dari', role: 'Anggota', motto: 'Gigih dan ulet', color: 'from-cyan-500 to-cyan-600', type: 'member' },
+    { id: 27, name: 'Irfan Hakim', role: 'Anggota', motto: 'Berilmu dan beramal', color: 'from-violet-500 to-violet-600', type: 'member' },
+    { id: 28, name: 'Tari Wulandari', role: 'Anggota', motto: 'Sukses butuh perjuangan', color: 'from-amber-500 to-amber-600', type: 'member' },
+    { id: 29, name: 'Fikri Ramadhan', role: 'Anggota', motto: 'Belajar dengan ikhlas', color: 'from-fuchsia-500 to-fuchsia-600', type: 'member' },
+    { id: 30, name: 'Dina Mariana', role: 'Anggota', motto: 'Tekun dan teliti', color: 'from-lime-500 to-lime-600', type: 'member' },
+    { id: 31, name: 'Wahyu Hidayat', role: 'Anggota', motto: 'Berani bermimpi', color: 'from-sky-500 to-sky-600', type: 'member' },
+    { id: 32, name: 'Sinta Dewi', role: 'Anggota', motto: 'Rajin dan disiplin', color: 'from-red-500 to-red-600', type: 'member' },
+    { id: 33, name: 'Rian Pratama', role: 'Anggota', motto: 'Fokus pada tujuan', color: 'from-emerald-500 to-emerald-600', type: 'member' },
+    { id: 34, name: 'Nisa Aulia', role: 'Anggota', motto: 'Berprestasi untuk bangsa', color: 'from-yellow-500 to-yellow-600', type: 'member' },
+    { id: 35, name: 'Faisal Ahmad', role: 'Anggota', motto: 'Kerja cerdas', color: 'from-purple-500 to-purple-600', type: 'member' },
+    { id: 36, name: 'Laila Sari', role: 'Anggota', motto: 'Semangat juang tinggi', color: 'from-blue-500 to-blue-600', type: 'member' },
   ];
 
-  const filteredStudents = students.filter(student =>
-    student.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredStudents = students.filter(student => {
+    const matchesSearch = student.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filter === 'all' ||
+      (filter === 'officers' && student.type === 'officer') ||
+      (filter === 'members' && student.type === 'member');
+    return matchesSearch && matchesFilter;
+  });
 
   return (
     <div className="min-h-screen py-24">
@@ -57,7 +62,7 @@ const Students = () => {
             animate={{ opacity: 1, y: 0 }}
             className="section-title mb-4"
           >
-            Daftar Siswa
+            Database Siswa
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -65,7 +70,7 @@ const Students = () => {
             transition={{ delay: 0.2 }}
             className="section-subtitle"
           >
-            Kelas XI TJKT 1 - Total <span className="font-bold text-primary-400">{students.length}</span> Siswa
+            <span className="font-futuristic">Kelas XI TJKT 1</span> - Total <span className="font-bold text-primary-400">{students.length}</span> Siswa
           </motion.p>
         </div>
 
@@ -73,16 +78,47 @@ const Students = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mb-12 max-w-md mx-auto relative"
+          className="mb-12 max-w-2xl mx-auto"
         >
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Cari nama siswa..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 rounded-2xl border border-white/10 bg-white/5 text-white placeholder-slate-400 focus:ring-2 focus:ring-primary-500 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-          />
+          {/* Terminal-style Search & Filter Bar */}
+          <div className="glass-panel p-2 flex flex-col md:flex-row gap-2 bg-black/40 border-primary-500/20 shadow-neon">
+            <div className="relative flex-1">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Terminal className="h-5 w-5 text-primary-500" />
+              </div>
+              <input
+                type="text"
+                className="block w-full pl-10 pr-3 py-3 bg-black/20 border border-white/5 rounded-xl text-primary-100 placeholder-primary-500/50 focus:outline-none focus:ring-1 focus:ring-primary-500/50 focus:border-primary-500/50 sm:text-sm font-mono transition-all"
+                placeholder="> search_student..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
+            <div className="flex bg-black/20 rounded-xl p-1 border border-white/5">
+              <button
+                onClick={() => setFilter('all')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === 'all' ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/20' : 'text-slate-400 hover:text-white'
+                  }`}
+              >
+                All
+              </button>
+              <button
+                onClick={() => setFilter('officers')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === 'officers' ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/20' : 'text-slate-400 hover:text-white'
+                  }`}
+              >
+                Officers
+              </button>
+              <button
+                onClick={() => setFilter('members')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === 'members' ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/20' : 'text-slate-400 hover:text-white'
+                  }`}
+              >
+                Members
+              </button>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -98,24 +134,34 @@ const Students = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 whileHover={{ y: -5 }}
                 key={student.id}
-                className="glass-card p-6 group"
+                className={`glass-card p-4 md:p-6 group relative overflow-hidden ${student.type === 'officer' ? 'border-primary-500/30' : ''
+                  }`}
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${student.color || 'from-primary-500 to-primary-600'} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
+                {student.type === 'officer' && (
+                  <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                    <div className="absolute top-0 right-0 bg-primary-500/20 w-full h-full transform rotate-45 translate-x-8 -translate-y-8"></div>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-4 mb-6 relative z-10">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${student.color || 'from-primary-500 to-primary-600'} flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                     {student.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
                     <h3 className="font-bold text-white group-hover:text-primary-400 transition-colors">{student.name}</h3>
-                    <span className="inline-flex items-center gap-1 text-xs font-medium text-primary-300 bg-primary-500/10 px-2 py-1 rounded-lg border border-primary-500/20">
+                    <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-lg border ${student.type === 'officer'
+                      ? 'text-primary-300 bg-primary-500/10 border-primary-500/20'
+                      : 'text-slate-400 bg-white/5 border-white/10'
+                      }`}>
                       <Award className="w-3 h-3" />
                       {student.role}
                     </span>
                   </div>
                 </div>
 
-                <div className="relative p-4 bg-white/5 rounded-xl border border-white/5">
+                <div className="relative p-4 bg-white/5 rounded-xl border border-white/5 group-hover:border-white/10 transition-colors">
                   <Quote className="absolute top-2 left-2 w-4 h-4 text-white/20 transform -scale-x-100" />
-                  <p className="text-sm text-slate-300 italic text-center px-2 pt-2">
+                  <p className="text-sm text-slate-300 italic text-center px-2 pt-2 font-light">
                     "{student.motto}"
                   </p>
                 </div>
@@ -130,8 +176,11 @@ const Students = () => {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <User className="w-16 h-16 text-slate-600 mx-auto mb-4" />
-            <p className="text-slate-400 text-lg">Tidak ada siswa yang ditemukan</p>
+            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10">
+              <User className="w-10 h-10 text-slate-600" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">No Results Found</h3>
+            <p className="text-slate-400">Try adjusting your search or filter.</p>
           </motion.div>
         )}
       </div>

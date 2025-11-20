@@ -3,12 +3,12 @@ const Profile = () => {
     <div className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="section-title mb-2">Profil Kelas XI TJKT 1</h1>
+          <h1 className="section-title mb-2">Profil <span className="font-futuristic">Kelas XI TJKT 1</span></h1>
           <p className="section-subtitle">SMK NU Hasyim Asyari</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <div className="glass-card p-8 hover:shadow-glass-lg transition-all duration-300">
+          <div className="glass-card p-5 md:p-8 hover:shadow-glass-lg transition-all duration-300">
             <h2 className="text-2xl font-bold mb-4 text-primary-400 flex items-center">
               <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -22,7 +22,7 @@ const Profile = () => {
             </p>
           </div>
 
-          <div className="glass-card p-8 hover:shadow-glass-lg transition-all duration-300">
+          <div className="glass-card p-5 md:p-8 hover:shadow-glass-lg transition-all duration-300">
             <h2 className="text-2xl font-bold mb-4 text-primary-400 flex items-center">
               <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -50,7 +50,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="glass-panel p-8 mb-12">
+        <div className="glass-panel p-5 md:p-8 mb-12">
           <h2 className="text-2xl font-bold mb-8 text-center text-white">Struktur Organisasi Kelas</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -73,17 +73,17 @@ const Profile = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="glass-card p-8 text-center hover:scale-105 transition-transform duration-300">
+          <div className="glass-card p-5 md:p-8 text-center hover:scale-105 transition-transform duration-300">
             <div className="text-5xl font-bold text-primary-400 mb-2">36</div>
             <p className="text-slate-300 font-medium">Total Siswa</p>
           </div>
 
-          <div className="glass-card p-8 text-center hover:scale-105 transition-transform duration-300">
+          <div className="glass-card p-5 md:p-8 text-center hover:scale-105 transition-transform duration-300">
             <div className="text-5xl font-bold text-emerald-400 mb-2">20</div>
             <p className="text-slate-300 font-medium">Siswa Laki-laki</p>
           </div>
 
-          <div className="glass-card p-8 text-center hover:scale-105 transition-transform duration-300">
+          <div className="glass-card p-5 md:p-8 text-center hover:scale-105 transition-transform duration-300">
             <div className="text-5xl font-bold text-purple-400 mb-2">16</div>
             <p className="text-slate-300 font-medium">Siswa Perempuan</p>
           </div>
