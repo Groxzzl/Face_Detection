@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, User, Award, Quote, Terminal, Filter, ChevronDown } from 'lucide-react';
 
 const Students = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [filter, setFilter] = useState('all'); // 'all', 'officers', 'members'
+
+  // Debounce search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   const students = [
     { id: 1, name: 'Ahmad Rizki', role: 'Ketua Kelas', motto: 'Belajar tanpa henti', color: 'from-blue-500 to-blue-600', type: 'officer' },
@@ -45,13 +55,15 @@ const Students = () => {
     { id: 36, name: 'Laila Sari', role: 'Anggota', motto: 'Semangat juang tinggi', color: 'from-blue-500 to-blue-600', type: 'member' },
   ];
 
-  const filteredStudents = students.filter(student => {
-    const matchesSearch = student.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = filter === 'all' ||
-      (filter === 'officers' && student.type === 'officer') ||
-      (filter === 'members' && student.type === 'member');
-    return matchesSearch && matchesFilter;
-  });
+  const filteredStudents = useMemo(() => {
+    return students.filter(student => {
+      const matchesSearch = student.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
+      const matchesFilter = filter === 'all' ||
+        (filter === 'officers' && student.type === 'officer') ||
+        (filter === 'members' && student.type === 'member');
+      return matchesSearch && matchesFilter;
+    });
+  }, [debouncedSearchTerm, filter, students]);
 
   return (
     <div className="min-h-screen py-24">
@@ -81,7 +93,7 @@ const Students = () => {
           className="mb-12 max-w-2xl mx-auto"
         >
           {/* Terminal-style Search & Filter Bar */}
-          <div className="glass-panel p-2 flex flex-col md:flex-row gap-2 bg-black/40 border-primary-500/20 shadow-neon">
+          <div className="glass-panel p-1.5 md:p-2 flex flex-col md:flex-row gap-2 bg-black/40 border-primary-500/20 shadow-neon">
             <div className="relative flex-1">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Terminal className="h-5 w-5 text-primary-500" />
@@ -121,18 +133,14 @@ const Students = () => {
           </div>
         </motion.div>
 
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          <AnimatePresence>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <AnimatePresence mode="popLayout">
             {filteredStudents.map((student) => (
               <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                whileHover={{ y: -5 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 key={student.id}
                 className={`glass-card p-4 md:p-6 group relative overflow-hidden ${student.type === 'officer' ? 'border-primary-500/30' : ''
                   }`}
@@ -168,7 +176,7 @@ const Students = () => {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         {filteredStudents.length === 0 && (
           <motion.div
