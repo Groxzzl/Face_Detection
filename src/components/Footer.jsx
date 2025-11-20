@@ -1,76 +1,78 @@
+import { Link } from 'react-router-dom';
 import { Instagram, Youtube, Facebook, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-white mt-auto border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+    <footer className="relative z-10 mt-20 pb-24 md:pb-10 border-t border-white/5 bg-black/20 backdrop-blur-lg">
+      <div className="container-custom py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
           {/* Brand Section */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
-                <span className="text-white font-bold text-lg">XI</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold tracking-tight">Kelas XI TJKT 1</h3>
-                <p className="text-slate-400 text-sm">SMK NU Hasyim Asyari</p>
-              </div>
-            </div>
+            <Link to="/" className="text-3xl font-display font-bold tracking-tighter bg-gradient-to-r from-white to-primary-400 bg-clip-text text-transparent inline-block">
+              Class<span className="text-primary-400">X</span>
+            </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Membangun generasi teknisi jaringan yang kompeten, berkarakter, dan siap menghadapi tantangan industri masa depan.
             </p>
-          </div>
-
-          {/* Contact Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <span className="w-1 h-6 bg-primary-500 rounded-full"></span>
-              Kontak Kami
-            </h3>
-            <div className="space-y-4 text-slate-400 text-sm">
-              <div className="flex items-start gap-3 group">
-                <Mail className="w-5 h-5 text-primary-500 group-hover:text-primary-400 transition-colors" />
-                <span className="group-hover:text-slate-300 transition-colors">tjkt1@smknuhasyimasyari.sch.id</span>
-              </div>
-              <div className="flex items-start gap-3 group">
-                <Phone className="w-5 h-5 text-primary-500 group-hover:text-primary-400 transition-colors" />
-                <span className="group-hover:text-slate-300 transition-colors">(021) 1234-5678</span>
-              </div>
-              <div className="flex items-start gap-3 group">
-                <MapPin className="w-5 h-5 text-primary-500 group-hover:text-primary-400 transition-colors" />
-                <span className="group-hover:text-slate-300 transition-colors">Jl. Pendidikan No. 123, Tarub, Tegal</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Social Media Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <span className="w-1 h-6 bg-primary-500 rounded-full"></span>
-              Ikuti Kami
-            </h3>
             <div className="flex gap-4">
-              <a href="#" className="w-12 h-12 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-all duration-300 group">
-                <Instagram className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+              <a href="#" className="w-10 h-10 bg-white/5 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-all duration-300 group border border-white/10 hover:border-primary-500 hover:shadow-neon">
+                <Instagram size={18} className="text-slate-400 group-hover:text-white transition-colors" />
               </a>
-              <a href="#" className="w-12 h-12 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-all duration-300 group">
-                <Facebook className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+              <a href="#" className="w-10 h-10 bg-white/5 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-all duration-300 group border border-white/10 hover:border-primary-500 hover:shadow-neon">
+                <Facebook size={18} className="text-slate-400 group-hover:text-white transition-colors" />
               </a>
-              <a href="#" className="w-12 h-12 bg-slate-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-all duration-300 group">
-                <Youtube className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+              <a href="#" className="w-10 h-10 bg-white/5 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-all duration-300 group border border-white/10 hover:border-primary-500 hover:shadow-neon">
+                <Youtube size={18} className="text-slate-400 group-hover:text-white transition-colors" />
               </a>
             </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
+              <span className="w-1 h-5 bg-primary-500 rounded-full"></span>
+              Quick Links
+            </h3>
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li><Link to="/students" className="hover:text-primary-400 transition-colors flex items-center gap-2 hover:translate-x-1 duration-300">Students</Link></li>
+              <li><Link to="/gallery" className="hover:text-primary-400 transition-colors flex items-center gap-2 hover:translate-x-1 duration-300">Gallery</Link></li>
+              <li><Link to="/schedule" className="hover:text-primary-400 transition-colors flex items-center gap-2 hover:translate-x-1 duration-300">Schedule</Link></li>
+              <li><Link to="/announcements" className="hover:text-primary-400 transition-colors flex items-center gap-2 hover:translate-x-1 duration-300">Announcements</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
+              <span className="w-1 h-5 bg-primary-500 rounded-full"></span>
+              Contact Us
+            </h3>
+            <ul className="space-y-4 text-sm text-slate-400">
+              <li className="flex items-start gap-3 group">
+                <div className="p-2 bg-white/5 rounded-lg group-hover:bg-primary-500/20 transition-colors">
+                  <Mail size={16} className="text-primary-500" />
+                </div>
+                <span className="group-hover:text-white transition-colors">tjkt1@smknuhasyimasyari.sch.id</span>
+              </li>
+              <li className="flex items-start gap-3 group">
+                <div className="p-2 bg-white/5 rounded-lg group-hover:bg-primary-500/20 transition-colors">
+                  <Phone size={16} className="text-primary-500" />
+                </div>
+                <span className="group-hover:text-white transition-colors">(021) 1234-5678</span>
+              </li>
+              <li className="flex items-start gap-3 group">
+                <div className="p-2 bg-white/5 rounded-lg group-hover:bg-primary-500/20 transition-colors">
+                  <MapPin size={16} className="text-primary-500" />
+                </div>
+                <span className="group-hover:text-white transition-colors">Jl. Pendidikan No. 123, Tarub, Tegal</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-sm text-center md:text-left">
-            &copy; {new Date().getFullYear()} Kelas XI TJKT 1. All rights reserved.
-          </p>
-          <p className="text-slate-600 text-xs">
-            Designed with <span className="text-red-500">❤</span> by Antigravity
-          </p>
+        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} ClassX. All rights reserved.</p>
+          <p>Designed with <span className="text-red-500 animate-pulse">❤</span> for the future.</p>
         </div>
       </div>
     </footer>

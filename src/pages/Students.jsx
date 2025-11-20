@@ -49,7 +49,7 @@ const Students = () => {
   );
 
   return (
-    <div className="min-h-screen py-20 bg-slate-50">
+    <div className="min-h-screen py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <motion.h1
@@ -65,7 +65,7 @@ const Students = () => {
             transition={{ delay: 0.2 }}
             className="section-subtitle"
           >
-            Kelas XI TJKT 1 - Total <span className="font-bold text-primary-600">{students.length}</span> Siswa
+            Kelas XI TJKT 1 - Total <span className="font-bold text-primary-400">{students.length}</span> Siswa
           </motion.p>
         </div>
 
@@ -81,7 +81,7 @@ const Students = () => {
             placeholder="Cari nama siswa..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 rounded-2xl border-none shadow-lg shadow-slate-200/50 focus:ring-2 focus:ring-primary-500 transition-all duration-300 bg-white text-slate-700 placeholder-slate-400"
+            className="w-full pl-12 pr-4 py-4 rounded-2xl border border-white/10 bg-white/5 text-white placeholder-slate-400 focus:ring-2 focus:ring-primary-500 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm"
           />
         </motion.div>
 
@@ -98,24 +98,24 @@ const Students = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 whileHover={{ y: -5 }}
                 key={student.id}
-                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
+                className="glass-card p-6 group"
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${student.color || 'from-primary-500 to-primary-600'} flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary-500/20`}>
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${student.color || 'from-primary-500 to-primary-600'} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
                     {student.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900">{student.name}</h3>
-                    <span className="inline-flex items-center gap-1 text-xs font-medium text-primary-600 bg-primary-50 px-2 py-1 rounded-lg">
+                    <h3 className="font-bold text-white group-hover:text-primary-400 transition-colors">{student.name}</h3>
+                    <span className="inline-flex items-center gap-1 text-xs font-medium text-primary-300 bg-primary-500/10 px-2 py-1 rounded-lg border border-primary-500/20">
                       <Award className="w-3 h-3" />
                       {student.role}
                     </span>
                   </div>
                 </div>
 
-                <div className="relative p-4 bg-slate-50 rounded-xl">
-                  <Quote className="absolute top-2 left-2 w-4 h-4 text-slate-300 transform -scale-x-100" />
-                  <p className="text-sm text-slate-600 italic text-center px-2 pt-2">
+                <div className="relative p-4 bg-white/5 rounded-xl border border-white/5">
+                  <Quote className="absolute top-2 left-2 w-4 h-4 text-white/20 transform -scale-x-100" />
+                  <p className="text-sm text-slate-300 italic text-center px-2 pt-2">
                     "{student.motto}"
                   </p>
                 </div>
@@ -130,8 +130,8 @@ const Students = () => {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <User className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-            <p className="text-slate-500 text-lg">Tidak ada siswa yang ditemukan</p>
+            <User className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+            <p className="text-slate-400 text-lg">Tidak ada siswa yang ditemukan</p>
           </motion.div>
         )}
       </div>

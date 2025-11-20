@@ -1,3 +1,6 @@
+import { motion } from 'framer-motion';
+import { Calendar, AlertCircle, Info, CheckCircle, Megaphone } from 'lucide-react';
+
 const Announcements = () => {
   const announcements = [
     {
@@ -69,120 +72,165 @@ const Announcements = () => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'high':
-        return 'bg-red-100 text-red-700 border-red-300';
+        return 'bg-red-500/20 text-red-400 border-red-500/30';
       case 'medium':
-        return 'bg-yellow-100 text-yellow-700 border-yellow-300';
+        return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
       case 'low':
-        return 'bg-green-100 text-green-700 border-green-300';
+        return 'bg-green-500/20 text-green-400 border-green-500/30';
       default:
-        return 'bg-slate-100 text-slate-700 border-slate-300';
+        return 'bg-slate-500/20 text-slate-400 border-slate-500/30';
+    }
+  };
+
+  const getPriorityIcon = (priority) => {
+    switch (priority) {
+      case 'high':
+        return <AlertCircle className="w-4 h-4 mr-1" />;
+      case 'medium':
+        return <Info className="w-4 h-4 mr-1" />;
+      case 'low':
+        return <CheckCircle className="w-4 h-4 mr-1" />;
+      default:
+        return <Info className="w-4 h-4 mr-1" />;
     }
   };
 
   const getPriorityLabel = (priority) => {
     switch (priority) {
-      case 'high':
-        return 'Penting';
-      case 'medium':
-        return 'Sedang';
-      case 'low':
-        return 'Info';
-      default:
-        return 'Info';
+      case 'high': return 'Penting';
+      case 'medium': return 'Sedang';
+      case 'low': return 'Info';
+      default: return 'Info';
     }
   };
 
   return (
-    <div className="py-16 bg-gradient-to-b from-slate-50 to-white">
+    <div className="py-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="section-title mb-2">Pengumuman Kelas</h1>
-          <p className="section-subtitle">Informasi terbaru dan penting untuk Kelas XI TJKT 1</p>
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="section-title mb-2"
+          >
+            Pengumuman Kelas
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="section-subtitle"
+          >
+            Informasi terbaru dan penting untuk Kelas XI TJKT 1
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300"
+          >
+            <div className="w-14 h-14 bg-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-red-500/30">
+              <AlertCircle className="w-7 h-7 text-red-400" />
+            </div>
+            <h4 className="font-semibold text-white mb-1">Penting</h4>
+            <p className="text-3xl font-bold text-red-400">
+              {announcements.filter(a => a.priority === 'high').length}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300"
+          >
+            <div className="w-14 h-14 bg-yellow-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-yellow-500/30">
+              <Info className="w-7 h-7 text-yellow-400" />
+            </div>
+            <h4 className="font-semibold text-white mb-1">Sedang</h4>
+            <p className="text-3xl font-bold text-yellow-400">
+              {announcements.filter(a => a.priority === 'medium').length}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300"
+          >
+            <div className="w-14 h-14 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+              <CheckCircle className="w-7 h-7 text-green-400" />
+            </div>
+            <h4 className="font-semibold text-white mb-1">Info</h4>
+            <p className="text-3xl font-bold text-green-400">
+              {announcements.filter(a => a.priority === 'low').length}
+            </p>
+          </motion.div>
         </div>
 
         <div className="space-y-6 mb-12">
-          {announcements.map((announcement) => (
-            <div key={announcement.id} className="card p-6 hover:shadow-xl hover:border-primary-200 transition-all duration-300">
+          {announcements.map((announcement, index) => (
+            <motion.div
+              key={announcement.id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="glass-card p-6 hover:border-primary-500/30 transition-all duration-300 group"
+            >
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3 flex-wrap">
-                    <h2 className="text-xl font-bold text-slate-900">{announcement.title}</h2>
-                    <span className={`text-xs px-3 py-1 rounded-full border font-medium ${getPriorityColor(announcement.priority)}`}>
+                    <h2 className="text-xl font-bold text-white group-hover:text-primary-400 transition-colors">{announcement.title}</h2>
+                    <span className={`flex items-center text-xs px-3 py-1 rounded-full border font-medium ${getPriorityColor(announcement.priority)}`}>
+                      {getPriorityIcon(announcement.priority)}
                       {getPriorityLabel(announcement.priority)}
                     </span>
                   </div>
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
                     <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
+                      <Calendar className="w-4 h-4 mr-1.5" />
                       {announcement.date}
                     </span>
-                    <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-lg text-xs font-medium">
+                    <span className="bg-white/5 text-slate-300 px-3 py-1 rounded-lg text-xs font-medium border border-white/10">
                       {announcement.category}
                     </span>
                   </div>
                 </div>
               </div>
-              <p className="text-slate-700 leading-relaxed">{announcement.content}</p>
-            </div>
+              <p className="text-slate-300 leading-relaxed">{announcement.content}</p>
+            </motion.div>
           ))}
         </div>
 
-        <div className="card p-8 bg-gradient-to-r from-primary-50 to-primary-100 border-2 border-primary-200 mb-12 hover:shadow-xl transition-all duration-300">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">Ada Pengumuman?</h3>
-            <p className="text-slate-700 mb-6">
-              Jika ada informasi penting yang perlu disampaikan ke seluruh kelas, hubungi ketua kelas atau sekretaris
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass-panel p-8 border border-primary-500/30 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl"></div>
+          <div className="relative z-10 text-center">
+            <div className="w-16 h-16 bg-primary-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary-500/30">
+              <Megaphone className="w-8 h-8 text-primary-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">Ada Pengumuman Penting?</h3>
+            <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
+              Jika ada informasi penting yang perlu disampaikan ke seluruh kelas, segera hubungi perangkat kelas untuk ditambahkan ke papan pengumuman.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary">
+              <button className="glass-btn-primary">
                 Hubungi Ketua Kelas
               </button>
-              <button className="btn-secondary">
+              <button className="glass-btn">
                 Hubungi Sekretaris
               </button>
             </div>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card p-6 text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-red-50 to-red-100/50">
-            <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
-              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-            </div>
-            <h4 className="font-semibold text-slate-900 mb-1">Penting</h4>
-            <p className="text-3xl font-bold text-primary-600">
-              {announcements.filter(a => a.priority === 'high').length}
-            </p>
-          </div>
-
-          <div className="card p-6 text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-yellow-50 to-yellow-100/50">
-            <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
-              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h4 className="font-semibold text-slate-900 mb-1">Sedang</h4>
-            <p className="text-3xl font-bold text-primary-600">
-              {announcements.filter(a => a.priority === 'medium').length}
-            </p>
-          </div>
-
-          <div className="card p-6 text-center hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-green-50 to-green-100/50">
-            <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
-              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h4 className="font-semibold text-slate-900 mb-1">Info</h4>
-            <p className="text-3xl font-bold text-primary-600">
-              {announcements.filter(a => a.priority === 'low').length}
-            </p>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,11 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Home, User, Users, Image, Calendar, Bell, Phone } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  Home,
+  Users,
+  Image,
+  Calendar,
+  Bell,
+  User,
+  Phone,
+  Menu,
+  X
+} from 'lucide-react';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -16,106 +26,101 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { path: '/', label: 'Beranda', icon: Home },
-    { path: '/profile', label: 'Profil', icon: User },
-    { path: '/students', label: 'Siswa', icon: Users },
-    { path: '/gallery', label: 'Galeri', icon: Image },
-    { path: '/schedule', label: 'Jadwal', icon: Calendar },
-    { path: '/announcements', label: 'Pengumuman', icon: Bell },
-    { path: '/contact', label: 'Kontak', icon: Phone },
+  const navItems = [
+    { name: 'Home', path: '/', icon: Home },
+    { name: 'Students', path: '/students', icon: Users },
+    { name: 'Gallery', path: '/gallery', icon: Image },
+    { name: 'Schedule', path: '/schedule', icon: Calendar },
+    { name: 'News', path: '/announcements', icon: Bell },
+    { name: 'Profile', path: '/profile', icon: User },
   ];
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/80 backdrop-blur-lg border-b border-slate-200/50 shadow-sm' : 'bg-transparent'
-        }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:shadow-primary-500/40 transition-all duration-300">
-                <span className="text-white font-bold text-lg">XI</span>
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="text-xl font-bold text-slate-900 tracking-tight">TJKT 1</h1>
-                <p className="text-xs text-slate-500 font-medium">SMK NU Hasyim Asyari</p>
-              </div>
+    <>
+      {/* Desktop Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden md:block ${scrolled ? 'py-4' : 'py-6'
+        }`}>
+        <div className="container-custom">
+          <div className={`glass-panel px-6 py-3 flex items-center justify-between transition-all duration-300 ${scrolled ? 'bg-black/40 backdrop-blur-xl border-white/5' : 'bg-white/5 border-white/10'
+            }`}>
+            <Link to="/" className="text-2xl font-display font-bold tracking-tighter bg-gradient-to-r from-white to-primary-400 bg-clip-text text-transparent">
+              Class<span className="text-primary-400">X</span>
             </Link>
-          </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${isActive(link.path)
-                    ? 'text-primary-600 bg-primary-50'
-                    : 'text-slate-600 hover:text-primary-600 hover:bg-slate-50'
-                  }`}
-              >
-                {link.label}
-                {isActive(link.path) && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute inset-0 rounded-xl bg-primary-50 -z-10"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-slate-100 overflow-hidden"
-          >
-            <div className="px-4 pt-2 pb-6 space-y-1">
-              {navLinks.map((link) => {
-                const Icon = link.icon;
+            <div className="flex items-center gap-1">
+              {navItems.map((item) => {
+                const active = isActive(item.path);
                 return (
                   <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${isActive(link.path)
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-slate-600 hover:bg-slate-50 hover:text-primary-600'
+                    key={item.path}
+                    to={item.path}
+                    className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${active
+                        ? 'text-white bg-white/10 shadow-glass-sm'
+                        : 'text-slate-400 hover:text-white hover:bg-white/5'
                       }`}
                   >
-                    <Icon size={20} />
-                    <span>{link.label}</span>
+                    {item.name}
+                    {active && (
+                      <motion.span
+                        layoutId="desktop-nav-indicator"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary-400 rounded-full mb-1.5"
+                      />
+                    )}
                   </Link>
                 );
               })}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+
+            <Link to="/contact" className="glass-btn-primary text-sm py-2 px-5">
+              <Phone size={16} />
+              Contact
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Top Bar (Logo only) */}
+      <div className={`fixed top-0 left-0 right-0 z-40 md:hidden transition-all duration-300 ${scrolled ? 'bg-black/60 backdrop-blur-xl border-b border-white/5 py-3' : 'py-4'
+        }`}>
+        <div className="container-custom flex justify-between items-center">
+          <Link to="/" className="text-xl font-display font-bold tracking-tighter text-white">
+            Class<span className="text-primary-400">X</span>
+          </Link>
+          <Link to="/profile" className="p-2 rounded-full bg-white/5 border border-white/10">
+            <User size={20} className="text-white" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden pb-safe">
+        <div className="glass-panel m-4 mb-4 border-t border-white/10 bg-black/80 backdrop-blur-2xl shadow-2xl">
+          <div className="flex justify-around items-center h-16 px-2">
+            {navItems.slice(0, 5).map((item) => {
+              const active = isActive(item.path);
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`mobile-nav-item ${active ? 'active' : ''}`}
+                >
+                  <div className={`p-2 rounded-xl transition-all duration-300 relative ${active ? 'bg-primary-500/20 text-primary-400 -translate-y-2 shadow-lg shadow-primary-500/20' : 'text-slate-400'
+                    }`}>
+                    <Icon size={24} strokeWidth={active ? 2.5 : 2} />
+                    {active && (
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary-400 rounded-full" />
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
 

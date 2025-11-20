@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Users, Trophy, Network, ArrowRight, Calendar, MapPin } from 'lucide-react';
+import { Users, Trophy, Network, ArrowRight, Calendar, MapPin, ExternalLink } from 'lucide-react';
 
 const Home = () => {
   const containerVariants = {
@@ -25,12 +25,14 @@ const Home = () => {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden pt-20">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden bg-slate-900">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-primary-600/20 blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-purple-600/20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <section className="relative min-h-[90vh] flex items-center justify-center py-20">
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary-500/30 rounded-full mix-blend-overlay filter blur-3xl animate-blob"></div>
+          <div className="absolute top-1/3 right-10 w-64 h-64 bg-purple-500/30 rounded-full mix-blend-overlay filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-1/2 w-64 h-64 bg-pink-500/30 rounded-full mix-blend-overlay filter blur-3xl animate-blob animation-delay-4000"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
@@ -38,23 +40,32 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-white/10 border border-white/20 text-primary-200 text-sm font-medium mb-8 backdrop-blur-md shadow-glass-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+              </span>
               SMK NU Hasyim Asyari
-            </span>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight">
-              Kelas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-purple-400">XI TJKT 1</span>
+            </div>
+
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight tracking-tight">
+              Kelas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 via-white to-primary-300">XI TJKT 1</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+
+            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
               Membangun masa depan digital dengan keahlian Teknik Jaringan Komputer dan Telekomunikasi.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/profile" className="btn-primary text-lg px-8 py-4 group">
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link to="/profile" className="glass-btn-primary w-full sm:w-auto text-lg px-8 py-4 group">
                 Lihat Profil
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/students" className="px-8 py-4 rounded-xl bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-all duration-300 font-semibold flex items-center justify-center gap-2 backdrop-blur-sm">
+              <Link to="/students" className="glass-btn w-full sm:w-auto text-lg px-8 py-4 group">
                 Daftar Siswa
+                <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
               </Link>
             </div>
           </motion.div>
@@ -62,44 +73,40 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white relative z-10 -mt-10 rounded-t-[3rem]">
+      <section className="py-10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
-            <motion.div variants={itemVariants} className="glass-card p-8 text-center group hover:-translate-y-2 transition-transform duration-300">
-              <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-8 h-8 text-primary-600" />
-              </div>
-              <h3 className="text-4xl font-bold text-slate-900 mb-2">36</h3>
-              <p className="text-slate-500 font-medium">Siswa Berbakat</p>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="glass-card p-8 text-center group hover:-translate-y-2 transition-transform duration-300">
-              <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Trophy className="w-8 h-8 text-purple-600" />
-              </div>
-              <h3 className="text-4xl font-bold text-slate-900 mb-2">15+</h3>
-              <p className="text-slate-500 font-medium">Penghargaan</p>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="glass-card p-8 text-center group hover:-translate-y-2 transition-transform duration-300">
-              <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Network className="w-8 h-8 text-emerald-600" />
-              </div>
-              <h3 className="text-4xl font-bold text-slate-900 mb-2">100%</h3>
-              <p className="text-slate-500 font-medium">Dedikasi</p>
-            </motion.div>
+            {[
+              { icon: Users, count: "36", label: "Siswa Berbakat", color: "text-blue-400", bg: "bg-blue-500/20" },
+              { icon: Trophy, count: "15+", label: "Penghargaan", color: "text-yellow-400", bg: "bg-yellow-500/20" },
+              { icon: Network, count: "100%", label: "Dedikasi", color: "text-emerald-400", bg: "bg-emerald-500/20" }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="glass-card p-8 flex items-center gap-6 group hover:-translate-y-1"
+              >
+                <div className={`w-16 h-16 ${stat.bg} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                  <stat.icon className={`w-8 h-8 ${stat.color}`} />
+                </div>
+                <div>
+                  <h3 className="text-4xl font-bold text-white mb-1">{stat.count}</h3>
+                  <p className="text-slate-400 font-medium">{stat.label}</p>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
       {/* Recent Activities */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="section-title">Kegiatan Terbaru</h2>
@@ -112,19 +119,19 @@ const Home = () => {
                 title: "Praktikum Jaringan",
                 desc: "Konfigurasi router dan switch di lab komputer modern.",
                 date: "15 Nov 2025",
-                color: "from-blue-500 to-blue-600"
+                image: "https://images.unsplash.com/photo-1558494949-efc527b89406?auto=format&fit=crop&w=800&q=80"
               },
               {
                 title: "Kunjungan Industri",
                 desc: "Study tour ke Data Center Telkom Indonesia.",
                 date: "10 Nov 2025",
-                color: "from-purple-500 to-purple-600"
+                image: "https://images.unsplash.com/photo-1558494949-efc527b89406?auto=format&fit=crop&w=800&q=80" // Placeholder, ideally different
               },
               {
                 title: "Juara LKS",
                 desc: "Meraih juara 2 Lomba Kompetensi Siswa tingkat Provinsi.",
                 date: "05 Nov 2025",
-                color: "from-emerald-500 to-emerald-600"
+                image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
               }
             ].map((item, index) => (
               <motion.div
@@ -133,25 +140,33 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                className="glass-card overflow-hidden group"
               >
-                <div className={`h-48 bg-gradient-to-br ${item.color} relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
-                    <Calendar className="w-4 h-4" />
+                <div className="h-48 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent z-10" />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 text-xs font-medium text-white/80 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                    <Calendar className="w-3 h-3" />
                     <span>{item.date}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">{item.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors">{item.title}</h3>
+                  <p className="text-slate-400 leading-relaxed text-sm mb-4">{item.desc}</p>
+                  <Link to="/gallery" className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">
+                    Lihat Detail <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </motion.div>
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/gallery" className="btn-secondary inline-flex items-center gap-2">
+            <Link to="/gallery" className="glass-btn inline-flex items-center gap-2">
               Lihat Semua Kegiatan
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -160,17 +175,21 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-10"></div>
-        <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Siap Menjadi Bagian dari Masa Depan?</h2>
-          <p className="text-slate-400 text-lg mb-8">
-            Bergabunglah dengan kami dalam mengeksplorasi dunia teknologi yang tanpa batas.
-          </p>
-          <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
-            Hubungi Kami
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+      <section className="py-24 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 text-center relative z-10">
+          <div className="glass-panel p-12 md:p-16 relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary-500/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">Siap Menjadi Bagian dari Masa Depan?</h2>
+            <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
+              Bergabunglah dengan kami dalam mengeksplorasi dunia teknologi yang tanpa batas. Jadilah ahli jaringan masa depan.
+            </p>
+            <Link to="/contact" className="glass-btn-primary inline-flex items-center gap-2 text-lg px-8 py-4">
+              Hubungi Kami
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
