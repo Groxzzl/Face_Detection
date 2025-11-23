@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CommandPalette from './components/CommandPalette';
-import ThreeBackground from './components/ThreeBackground';
+
 
 import Home from './pages/Home';
 import Students from './pages/Students';
@@ -29,7 +29,14 @@ function App() {
         <Router>
             <ScrollToTop />
             <div className="min-h-screen bg-background text-slate-100 selection:bg-primary-500 selection:text-white relative">
-                <ThreeBackground />
+                <div className="mesh-bg"></div>
+
+                {/* Dynamic Background Elements */}
+                <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+                    <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-primary-900/20 rounded-full blur-[100px] animate-blob"></div>
+                    <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] bg-purple-900/20 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
+                    <div className="absolute bottom-[-10%] left-[20%] w-[45vw] h-[45vw] bg-blue-900/20 rounded-full blur-[100px] animate-blob animation-delay-4000"></div>
+                </div>
 
 
                 <Navbar />

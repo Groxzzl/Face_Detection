@@ -72,7 +72,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} XI TJKT 1. All rights reserved.</p>
-          <p>Designed with <span className="text-red-500 animate-pulse">❤</span> for the future.</p>
+          <p>Designed By <span className="text-red-500 animate-pulse">XI TJKT 1 Student</span> for the future</p>
         </div>
       </div>
     </footer>
