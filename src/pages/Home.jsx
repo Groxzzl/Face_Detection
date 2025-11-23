@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Trophy, Network, ArrowRight, Calendar, MapPin, ExternalLink } from 'lucide-react';
-import NetworkGlobe from '../components/NetworkGlobe';
 
 const Home = () => {
   const containerVariants = {
@@ -28,7 +27,7 @@ const Home = () => {
   return (
     <div className="overflow-hidden pt-20">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center py-20">
+      <section className="relative min-h-[90vh] flex items-center justify-center py-20">
         {/* Floating Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary-500/30 rounded-full mix-blend-overlay filter blur-3xl animate-blob"></div>
@@ -36,52 +35,40 @@ const Home = () => {
           <div className="absolute -bottom-8 left-1/2 w-64 h-64 bg-pink-500/30 rounded-full mix-blend-overlay filter blur-3xl animate-blob animation-delay-4000"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column: Text */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-white/10 border border-white/20 text-primary-200 text-sm font-medium mb-8 backdrop-blur-md shadow-glass-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
-                </span>
-                SMK NU Hasyim Asyari
-              </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-white/10 border border-white/20 text-primary-200 text-sm font-medium mb-8 backdrop-blur-md shadow-glass-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+              </span>
+              SMK NU Hasyim Asyari
+            </div>
 
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight tracking-tight">
-                Kelas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 via-white to-primary-300">XI TJKT 1</span>
-              </h1>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight tracking-tight">
+              Kelas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 via-white to-primary-300">XI TJKT 1</span>
+            </h1>
 
-              <p className="text-xl text-slate-300 mb-12 max-w-lg leading-relaxed font-light">
-                Membangun masa depan digital dengan keahlian Teknik Jaringan Komputer dan Telekomunikasi.
-              </p>
+            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+              Membangun masa depan digital dengan keahlian Teknik Jaringan Komputer dan Telekomunikasi.
+            </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/profile" className="glass-btn-primary w-full sm:w-auto text-lg px-8 py-4 group">
-                  Lihat Profil
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link to="/students" className="glass-btn w-full sm:w-auto text-lg px-8 py-4 group">
-                  Daftar Siswa
-                  <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Right Column: 3D Globe */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="hidden lg:block"
-            >
-              <NetworkGlobe />
-            </motion.div>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link to="/profile" className="glass-btn-primary w-full sm:w-auto text-lg px-8 py-4 group">
+                Lihat Profil
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link to="/students" className="glass-btn w-full sm:w-auto text-lg px-8 py-4 group">
+                Daftar Siswa
+                <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -160,6 +147,8 @@ const Home = () => {
                   <img
                     src={item.image}
                     alt={item.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 text-xs font-medium text-white/80 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">

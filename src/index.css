@@ -31,7 +31,7 @@
 
 @layer components {
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass rounded-3xl;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass rounded-3xl;
   }
 
   .glass-card {
@@ -114,7 +114,7 @@
 
 .blob {
   position: absolute;
-  filter: blur(80px);
+  filter: blur(40px);
   z-index: -1;
   opacity: 0.4;
   animation: blob 15s infinite alternate;
