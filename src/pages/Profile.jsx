@@ -54,10 +54,10 @@ const Profile = () => {
           <h2 className="text-2xl font-bold mb-8 text-center text-white">Struktur Organisasi Kelas</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { role: "Wali Kelas", name: "Bapak/Ibu Guru", code: "WK", color: "from-primary-600 to-primary-700" },
-              { role: "Ketua Kelas", name: "Ahmad Rizki", code: "KK", color: "from-primary-600 to-primary-700" },
-              { role: "Wakil Ketua", name: "Siti Nurhaliza", code: "WK", color: "from-primary-600 to-primary-700" },
-              { role: "Sekretaris", name: "Dewi Lestari", code: "S", color: "from-purple-600 to-purple-700" },
+              { role: "Wali Kelas", name: "Burhanudin S.Kom", code: "WK", color: "from-primary-600 to-primary-700" },
+              { role: "Ketua Kelas", name: "Calista Lutfi Arindi", code: "KK", color: "from-primary-600 to-primary-700" },
+              { role: "Wakil Ketua", name: "Muhammad Riza", code: "WK", color: "from-primary-600 to-primary-700" },
+              { role: "Sekretaris", name: "Shinta Zahra Aulia", code: "S", color: "from-purple-600 to-purple-700" },
               { role: "Bendahara", name: "Budi Santoso", code: "B", color: "from-purple-600 to-purple-700" },
               { role: "Koordinator", name: "Andi Pratama", code: "K", color: "from-purple-600 to-purple-700" },
             ].map((item, index) => (
@@ -74,17 +74,17 @@ const Profile = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="glass-card p-5 md:p-8 text-center hover:scale-105 transition-transform duration-300">
-            <div className="text-5xl font-bold text-primary-400 mb-2">36</div>
+            <div className="text-5xl font-bold text-primary-400 mb-2">22</div>
             <p className="text-slate-300 font-medium">Total Siswa</p>
           </div>
 
           <div className="glass-card p-5 md:p-8 text-center hover:scale-105 transition-transform duration-300">
-            <div className="text-5xl font-bold text-emerald-400 mb-2">20</div>
+            <div className="text-5xl font-bold text-emerald-400 mb-2">17</div>
             <p className="text-slate-300 font-medium">Siswa Laki-laki</p>
           </div>
 
           <div className="glass-card p-5 md:p-8 text-center hover:scale-105 transition-transform duration-300">
-            <div className="text-5xl font-bold text-purple-400 mb-2">16</div>
+            <div className="text-5xl font-bold text-purple-400 mb-2">5</div>
             <p className="text-slate-300 font-medium">Siswa Perempuan</p>
           </div>
         </div>

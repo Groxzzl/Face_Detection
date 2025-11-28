@@ -15,9 +15,9 @@ const Gallery = () => {
   ];
 
   const galleryItems = [
-    { id: 1, title: 'Praktikum Jaringan Komputer', category: 'praktikum', date: '15 Nov 2025', color: 'from-blue-400 to-blue-600' },
+    { id: 1, title: 'Praktikum Mikrotik', category: 'praktikum', date: '15 Nov 2025', color: 'from-blue-400 to-blue-600' },
     { id: 2, title: 'Konfigurasi Router Cisco', category: 'praktikum', date: '14 Nov 2025', color: 'from-indigo-400 to-indigo-600' },
-    { id: 3, title: 'Study Tour ke Data Center', category: 'event', date: '10 Nov 2025', color: 'from-green-400 to-green-600' },
+    { id: 3, title: 'Study Tour ke PT ICON PLUS SEMARANG', category: 'event', date: '10 Nov 2025', color: 'from-green-400 to-green-600' },
     { id: 4, title: 'Lomba Networking Competition', category: 'lomba', date: '5 Nov 2025', color: 'from-purple-400 to-purple-600' },
     { id: 5, title: 'Workshop Mikrotik', category: 'event', date: '3 Nov 2025', color: 'from-pink-400 to-pink-600' },
     { id: 6, title: 'Presentasi Project Akhir', category: 'kelas', date: '1 Nov 2025', color: 'from-yellow-400 to-yellow-600' },
@@ -50,7 +50,7 @@ const Gallery = () => {
             transition={{ delay: 0.2 }}
             className="section-subtitle"
           >
-            Dokumentasi lengkap momen-momen bersejarah kelas kami
+            Dokumentasi lengkap momen-momen kelas kami
           </motion.p>
         </div>
 
@@ -140,7 +140,7 @@ const Gallery = () => {
             <div className="relative z-10 max-w-2xl mx-auto">
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Punya Foto Kegiatan?</h3>
               <p className="text-slate-300 mb-8 text-lg">
-                Bagikan momen seru kelas kita! Hubungi tim dokumentasi untuk menambahkan foto ke galeri.
+                Bagikan momen seru kelas! Hubungi tim dokumentasi untuk menambahkan foto ke galeri.
               </p>
               <button className="glass-btn-primary px-8 py-3 rounded-xl font-bold inline-flex items-center gap-2">
                 Hubungi Tim Dokumentasi

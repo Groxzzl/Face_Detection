@@ -221,7 +221,7 @@ const Schedule = () => {
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5" />
-                <span>Bawa laptop pribadi (jika ada) untuk mata pelajaran produktif.</span>
+                <span>Bawa laptop pribadi (jika ada) untuk mata pelajaran TJKT.</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5" />
